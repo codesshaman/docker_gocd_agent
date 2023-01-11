@@ -1,0 +1,18 @@
+version: "3"
+services:
+  go-agent-1:
+    image: 'gocd/gocd-agent-alpine-3.16:v22.3.0'
+    restart: unless-stopped
+    links:
+      - "go-server"
+    depends_on:
+      - "go-server"
+    container_name: gocd_agent_1
+    environment:
+      AGENT_AUTO_REGISTER_KEY: 'your-agent-key-here'
+      GO_SERVER_URL: https://your_host:8154/go
+    # For access to target
+    # mount target folder
+    # with this agent
+    # volumes:
+      # - ./target_folder:/agent_folder:z
