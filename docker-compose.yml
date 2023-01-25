@@ -6,7 +6,7 @@ services:
     container_name: gocd_agent_1
     environment:
       AGENT_AUTO_REGISTER_KEY: 'your_agent_autoregister_key'
-      GO_SERVER_URL: https://your_ip_address:8154/go
+      GO_SERVER_URL: https://your_ip_address:8154/go #:8153 if not use ssl
     # For access to target
     # mount target folder
     # with this agent
