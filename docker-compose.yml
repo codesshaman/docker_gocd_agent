@@ -2,13 +2,18 @@ version: "3"
 services:
   go-agent-1:
     image: 'gocd/gocd-agent-alpine-3.16:v22.3.0'
+    container_name: $GOCD_AGENT_NAME
     restart: unless-stopped
-    container_name: gocd_agent_1
     environment:
-      AGENT_AUTO_REGISTER_KEY: 'your_agent_autoregister_key'
-      GO_SERVER_URL: https://your_ip_address:8154/go #:8153 if not use ssl
-    # For access to target
-    # mount target folder
-    # with this agent
-    # volumes:
-      # - ./target_folder:/agent_folder:z
+      AGENT_AUTO_REGISTER_KEY: $AGENT_AUTO_REGISTER_KEY
+      GO_SERVER_URL: $GOCD_SERVER_URL
+    working_dir: /app
+    volumes:
+      - target_folder:/app:z
+
+volumes:
+  target_folder:
+    driver_opts:
+      o: bind
+      type: none
+      device: $TARGET_FOLDER_PATH
